@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "rewriteRelativeImportExtensions": true,
+    "outDir": "dist",
+    "allowImportingTsExtensions": true
+  },
+  "include": [
+    "**/*.ts"
+  ]
+}

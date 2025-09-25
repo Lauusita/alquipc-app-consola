@@ -1,0 +1,28 @@
+{
+  "name": "alquipc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.ts",
+  "types": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "npx ts-node app.ts",
+    "build": "npx tsc app.ts --outDir dist",
+    "start": "pkg -t node*-win-x64 dist/app.js"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/inquirer": "^9.0.9",
+    "colors": "^1.4.0",
+    "inquirer": "^12.9.6"
+  },
+  "devDependencies": {
+    "@types/node": "^24.5.2",
+    "pkg": "^5.8.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2"
+  }
+}
