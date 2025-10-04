@@ -3,7 +3,7 @@ export const numEquiposValidation = (numEquipos: string) => {
   if (!numEquipos || numEquipos.trim() === "") return "La cantidad de equipos no puede estar vacía";
   if (!/^\d+$/.test(numEquipos)) return "La cantidad de equipos debe contener solo números";
   const value = parseInt(numEquipos);
-  if (value <= 0) return "La cantidad de equipos debe ser mayor que 0";
+  if (value < 2) return "La cantidad de equipos debe ser mayor que 2";
   if (value > 1000) return "La cantidad de equipos no puede superar los 1000";
   return true;
 };

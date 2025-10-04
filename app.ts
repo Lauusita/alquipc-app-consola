@@ -15,7 +15,10 @@ console.log("                   Laura Arteta  ".red);
 console.log("=====================================================\n".green);
 
 const imprimirFactura = (f: Factura) => {
-  console.log("📌 DATOS DEL CLIENTE".yellow.bold);
+  console.log("📌 DETALLES DE FACTURA".yellow.bold);
+  console.log(`Id factura: `.cyan + `${f.idFactura}`.white);
+
+  console.log("\n📌 DATOS DEL CLIENTE".yellow.bold);
   console.log(`Nombre: `.cyan + `${f.cliente}`.white);
   console.log(`ID Cliente: `.cyan + `${f.idCliente}`.white);
   console.log(`Teléfono: `.cyan + `${f.telefono}`.white);

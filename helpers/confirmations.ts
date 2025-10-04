@@ -35,12 +35,12 @@ export const confirmation = async (): Promise<"Y" | "N"> => {
 
   return new Promise((resolve) => {
     const ask = () => {
-      rl.question("¿Confirma los datos ingresados? (Y/N)".blue + " ", (answer) => {
+      rl.question("\n¿Confirma los datos ingresados? (Y/N)".blue + " ", (answer) => {
         const value = answer.trim().toUpperCase();
 
         if (value !== "Y" && value !== "N") {
           console.log(`\nDebes ingresar ${"Y".green } (sí) o ${"N".red } (no)\n`);
-          ask(); // 🔁 vuelve a preguntar
+          ask();
         } else {
           rl.close();
           resolve(value as "Y" | "N");

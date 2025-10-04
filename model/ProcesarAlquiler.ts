@@ -2,6 +2,7 @@ import type { Alquiler } from "./Alquiler";
 import type { User } from "./User";
 import { TipoServicio } from "../types/tipoServicio";
 import type { Factura } from "../types/tipoServicio";
+import { v4 as uuidv4 } from "uuid";
 
 export class ProcesarAlquiler {
   private numServicio: number;
@@ -12,7 +13,7 @@ export class ProcesarAlquiler {
   private valorDomicilio: number;
   private Alquiler: Alquiler;
   private Usuario: User;
-
+  
   constructor(
     Alquiler: Alquiler,
     Usuario: User
@@ -23,8 +24,6 @@ export class ProcesarAlquiler {
     this.valorAlquiler = 0
     this.valorDiasAdicionales = 0
     this.total = 0
-    this.descuento = 1750
-    this.valorDomicilio = 1750
   }
   
   public setNumServicio(numServicio: number) {
@@ -72,9 +71,18 @@ export class ProcesarAlquiler {
       this.valorAlquiler = 35000 * (numEquipos * numDiasAlquiler)
       this.valorDiasAdicionales = numDiasAdicionales * 34500
 
+      
+      let descuentoAdicionales = 0;
+      
+      if (numDiasAdicionales > 0) {
+        descuentoAdicionales = this.valorDiasAdicionales * (0.02 * numDiasAdicionales);
+        this.valorDiasAdicionales -= descuentoAdicionales;
+      }
+      
       this.total = this.valorDiasAdicionales + this.valorAlquiler
-
+      
       let factura: Factura = {
+        idFactura: uuidv4(),
         cliente,
         email,
         telefono,
@@ -97,8 +105,8 @@ export class ProcesarAlquiler {
 
       switch (this.numServicio) {
         case 2:   
-          this.valorDomicilio = this.valorDomicilio * (numDiasAlquiler * numEquipos);
-          this.total = this.valorDiasAdicionales + this.valorAlquiler + this.valorDomicilio
+          this.valorDomicilio = this.total * 0.05;
+          this.total += this.valorDomicilio;
 
           return factura = {
             ...factura, 
@@ -106,18 +114,18 @@ export class ProcesarAlquiler {
             valorDomicilio: this.valorDomicilio
           }
         case 3:
-          this.descuento = this.descuento * (numDiasAlquiler * numEquipos);
-          this.total = this.valorDiasAdicionales + this.valorAlquiler + this.descuento
+          this.descuento = this.total * 0.05;
+          this.total -= this.descuento;
 
           return factura = {
             ...factura, 
             totalPagar: this.total,
             descuento: this.descuento
           }
+
         default:
-          break;
+          return factura;
       }
-      return factura
     } catch (error) {
       console.error("Hubo un error, por favor ingrese de nuevo.")
     }

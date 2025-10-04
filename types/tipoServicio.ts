@@ -13,6 +13,7 @@ export enum TipoServicio {
 }
 
 export interface Factura {
+  idFactura: string;
   cliente: string;
   idCliente: number;
   telefono: number;
